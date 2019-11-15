@@ -111,7 +111,7 @@ public class NhanVienDAO {
 				String email = (rs.getString(8) == null) ? "" : rs.getString(8);
 				String soDienThoai = (rs.getString(9) == null) ? "" : rs.getString(9);
 				int chucVu = (rs.getBoolean(1) == true) ? 1 : 0;
-				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd, ngayVaoLam, diaChi, email, soDienThoai, chucVu);
+				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu);
 				dsNhanVien.add(nhanVien);
 			}
 		} catch (Exception e) {
@@ -146,7 +146,7 @@ public class NhanVienDAO {
 				String email = (rs.getString(8) == null) ? "" : rs.getString(8);
 				String soDienThoai = (rs.getString(9) == null) ? "" : rs.getString(9);
 				int chucVu = (rs.getBoolean(1) == true) ? 1 : 0;
-				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd, ngayVaoLam, diaChi, email, soDienThoai, chucVu);
+				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu);
 				if(!danhSachNhanVienOnl.contains(nhanVien)) {
 					danhSachNhanVienOnl.add(nhanVien);
 					System.out.println("Danh sách đăng nhập "+danhSachNhanVienOnl+"\n");

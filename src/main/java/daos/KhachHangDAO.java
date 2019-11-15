@@ -106,7 +106,7 @@ public class KhachHangDAO {
 				String cmnd = (rs.getString(6) == null) ? "" : rs.getString(6);
 				String email = (rs.getString(7) == null) ? "" : rs.getString(7);
 				String soDienThoai = (rs.getString(8) == null) ? "" : rs.getString(8);
-				KhachHang khachHang = new KhachHang(maKH, hoTen, gioiTinh, ngaySinh, cmnd, email, soDienThoai, diaChi);
+				KhachHang khachHang = new KhachHang(maKH, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), email, soDienThoai.replaceAll("[\\s]", ""), diaChi);
 				dsKhachHang.add(khachHang);
 			}
 			return dsKhachHang;
@@ -143,7 +143,7 @@ public class KhachHangDAO {
 				String cmnd = (rs.getString(6) == null) ? "" : rs.getString(6);
 				String email = (rs.getString(7) == null) ? "" : rs.getString(7);
 				String soDienThoai = (rs.getString(8) == null) ? "" : rs.getString(8);
-				KhachHang khachHang = new KhachHang(maKH, hoTen, gioiTinh, ngaySinh, cmnd, email, soDienThoai, diaChi);
+				KhachHang khachHang = new KhachHang(maKH, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), email, soDienThoai.replaceAll("[\\s]", ""), diaChi);
 				System.out.println("Khách Hàng đăng nhập : "+khachHang);
 				if(!danhSachKhachHangOnl.contains(khachHang)) {
 					danhSachKhachHangOnl.add(khachHang);
