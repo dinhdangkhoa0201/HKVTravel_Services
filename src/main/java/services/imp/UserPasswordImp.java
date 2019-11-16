@@ -16,10 +16,15 @@ public class UserPasswordImp extends UnicastRemoteObject implements UserPassword
 	public UserPasswordImp() throws RemoteException{
 		userPasswordDAO = new UserPasswordDAO();
 	}
+
+	@Override
 	public UserPassword timUserPassword(String username, String password) throws RemoteException {
 		return userPasswordDAO.dangNhap(username, password);
 	}
-	public Object dangNhap(String user, String password) throws RemoteException {
-		return null;
+	
+	@Override
+	public boolean doiMatKhau(UserPassword userPassword) throws RemoteException{
+		return userPasswordDAO.doiMatKhau(userPassword);
 	}
+
 }

@@ -34,4 +34,19 @@ public class UserPasswordDAO {
 		}
 		return null;
 	}
+	
+	public boolean doiMatKhau(UserPassword userPassword) {
+		try {
+			con = Database.getInStance().getConnection();
+			call = con.prepareCall("{call dbo.DoiMatKhau (?, ?)}");
+			call.setString(1, userPassword.getId());
+			call.setString(2, userPassword.getPassWord());
+			if(call.executeUpdate() > 0)
+				return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
