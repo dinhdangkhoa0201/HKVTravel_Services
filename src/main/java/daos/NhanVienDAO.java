@@ -17,7 +17,7 @@ public class NhanVienDAO {
 	private ResultSet rs;
 	private List<NhanVien> danhSachNhanVienOnl = new ArrayList<NhanVien>();
 	public boolean themNhanVien(NhanVien nhanVien, UserPassword userPassword) {
-		try {
+		try {	
 			con = Database.getInStance().getConnection();
 			call = con.prepareCall("{call dbo.CRUDNhanVien (1, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 			call.setString(1, nhanVien.getHoTen());
@@ -94,7 +94,7 @@ public class NhanVienDAO {
 			rs = call.executeQuery();
 			while(rs.next()) {
 				String maNV = rs.getString(1);
-				String hoTen = (rs.getString(2) == null) ? "" : rs.getString(1);
+				String hoTen = (rs.getString(2) == null) ? "" : rs.getString(2);
 				String gioiTinh = "";
 				switch (rs.getInt(3)) {
 				case 0: gioiTinh = "Nam";
@@ -149,7 +149,6 @@ public class NhanVienDAO {
 				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu);
 				if(!danhSachNhanVienOnl.contains(nhanVien)) {
 					danhSachNhanVienOnl.add(nhanVien);
-					System.out.println("Danh sách đăng nhập "+danhSachNhanVienOnl+"\n");
 					return nhanVien;
 				}
 			}
@@ -164,7 +163,6 @@ public class NhanVienDAO {
 	public boolean dangXuat(NhanVien nhanVien) {
 		if(danhSachNhanVienOnl.contains(nhanVien)) {
 			danhSachNhanVienOnl.remove(nhanVien);
-			System.out.println("Danh sách đăng nhập "+danhSachNhanVienOnl+"\n");
 			return true;
 		}
 		return false;

@@ -28,7 +28,6 @@ public class KhachHangDAO {
 			con = Database.getInStance().getConnection();
 			call = con.prepareCall("{call dbo.CRUDKhachHang(1, null, ?, ?, ?, ?, ?, ?, ?, ?)}");
 			call.setString(1, khachHang.getHoTenKH());
-			System.out.println("Thêm kh "+khachHang);
 			if(khachHang.getGioiTinh().equals("Nam"))
 				call.setInt(2, 0);
 			else if(khachHang.getGioiTinh().equals("Nữ"))
@@ -144,10 +143,8 @@ public class KhachHangDAO {
 				String email = (rs.getString(7) == null) ? "" : rs.getString(7);
 				String soDienThoai = (rs.getString(8) == null) ? "" : rs.getString(8);
 				KhachHang khachHang = new KhachHang(maKH, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), email, soDienThoai.replaceAll("[\\s]", ""), diaChi);
-				System.out.println("Khách Hàng đăng nhập : "+khachHang);
 				if(!danhSachKhachHangOnl.contains(khachHang)) {
 					danhSachKhachHangOnl.add(khachHang);
-					System.out.println(danhSachKhachHangOnl);
 					return khachHang;
 				}
 			}
