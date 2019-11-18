@@ -183,4 +183,17 @@ public class KhachHangDAO {
 		});
 		return listSDT;
 	}
+	
+	public List<String> danhSachCMND(){
+		List<String> listCMND = new ArrayList<>();
+		List<KhachHang> list = danhsachKhachHang();
+		list.forEach(x -> {
+			if(!listCMND.contains(x.getCmnd())) {
+				listCMND.add(x.getCmnd().replaceAll("-", ""));
+			}
+		});
+		return listCMND;
+	}
+	
+	
 }

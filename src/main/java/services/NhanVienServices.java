@@ -16,4 +16,5 @@ public interface NhanVienServices extends Remote{
 	public boolean dangXuat(NhanVien nhanVien) throws RemoteException;
 	public List<String> danhSachEmail() throws RemoteException;
 	public List<String> danhSachSDT() throws RemoteException;
+	public List<String> danhSachCMND() throws RemoteException;
 }

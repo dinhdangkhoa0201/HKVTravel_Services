@@ -189,4 +189,15 @@ public class NhanVienDAO {
 		});
 		return listSDT;
 	}
+	
+	public List<String> danhSachCMND(){
+		List<String> listCMND = new ArrayList<String>();
+		List<NhanVien> list = danhsachNhanVien();
+		list.forEach(x -> {
+			if(!listCMND.contains(x.getCmnd())) {
+				listCMND.add(x.getCmnd().replaceAll("[-]", ""));
+			}
+		});
+		return listCMND;
+	}
 }

@@ -62,4 +62,9 @@ public class KhachHangImp extends UnicastRemoteObject implements KhachHangServic
 		return khachHangDAO.danhSachSDT();
 	}
 
+	@Override
+	public List<String> danhSachCMND() throws RemoteException {
+		return khachHangDAO.danhSachCMND();
+	}
+
 }

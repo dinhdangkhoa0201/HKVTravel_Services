@@ -52,12 +52,16 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienServices
 
 	@Override
 	public List<String> danhSachEmail() throws RemoteException {
-		// TODO Auto-generated method stub
 		return nhanVienDAO.danhSachEmail();
 	}
 
 	@Override
 	public List<String> danhSachSDT() throws RemoteException {
 		return nhanVienDAO.danhSachSDT();
+	}
+
+	@Override
+	public List<String> danhSachCMND() throws RemoteException {
+		return nhanVienDAO.danhSachCMND();
 	}
 }

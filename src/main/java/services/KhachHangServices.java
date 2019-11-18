@@ -16,4 +16,5 @@ public interface KhachHangServices extends Remote{
 	public boolean dangXuat(KhachHang khachHang) throws RemoteException;
 	public List<String> danhSachEmail() throws RemoteException;
 	public List<String> danhSachSDT() throws RemoteException;
+	public List<String> danhSachCMND() throws RemoteException;
 }
