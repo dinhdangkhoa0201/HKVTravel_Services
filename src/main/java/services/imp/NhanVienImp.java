@@ -64,4 +64,9 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienServices
 	public List<String> danhSachCMND() throws RemoteException {
 		return nhanVienDAO.danhSachCMND();
 	}
+
+	@Override
+	public boolean capNhatAnhDaiDien(String id, byte[] anh) throws RemoteException {
+		return nhanVienDAO.capNhatAnhDaiDien(id, anh);
+	}
 }

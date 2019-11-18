@@ -19,7 +19,7 @@ public class NhanVienDAO {
 	public boolean themNhanVien(NhanVien nhanVien, UserPassword userPassword) {
 		try {	
 			con = Database.getInStance().getConnection();
-			call = con.prepareCall("{call dbo.CRUDNhanVien (1, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			call = con.prepareCall("{call dbo.CRUDNhanVien (1, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 			call.setString(1, nhanVien.getHoTen());
 			if(nhanVien.getGioiTinh().equals("Nam"))
 				call.setInt(2, 0);
@@ -34,7 +34,8 @@ public class NhanVienDAO {
 			call.setString(7, nhanVien.getEmail());
 			call.setString(8, nhanVien.getSoDienThoai());
 			call.setInt(9, nhanVien.getChucVu());
-			call.setString(10, userPassword.getPassWord());
+			call.setBytes(10, nhanVien.getAnh());
+			call.setString(11, userPassword.getPassWord());
 			if(call.executeUpdate() > 0)
 				return true;
 		} catch (Exception e) {
@@ -47,7 +48,7 @@ public class NhanVienDAO {
 	public boolean xoaNhanVien(NhanVien nhanVien) {
 		try {
 			con = Database.getInStance().getConnection();
-			call = con.prepareCall("{call dbo.CRUDNhanVien(3, ?, null, null, null, null, null, null, null, null, null)}");
+			call = con.prepareCall("{call dbo.CRUDNhanVien(3, ?, null, null, null, null, null, null, null, null, null, null)}");
 			call.setString(1, nhanVien.getMaNV());
 			if(call.executeUpdate() > 1)
 				return true;
@@ -60,7 +61,7 @@ public class NhanVienDAO {
 	public boolean suaNhanVien(NhanVien nhanVien) {
 		try {
 			con = Database.getInStance().getConnection();
-			call = con.prepareCall("{call dbo.CRUDNhanVien (2, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			call = con.prepareCall("{call dbo.CRUDNhanVien (2, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 			call.setString(1, nhanVien.getMaNV());
 			call.setString(2, nhanVien.getHoTen());
 			if(nhanVien.getGioiTinh().equals("Nam"))
@@ -76,7 +77,8 @@ public class NhanVienDAO {
 			call.setString(8, nhanVien.getEmail());
 			call.setString(9, nhanVien.getSoDienThoai());
 			call.setInt(10, nhanVien.getChucVu());
-			call.setString(11, "");
+			call.setBytes(11, nhanVien.getAnh());
+			call.setString(12, "");
 			if(call.executeUpdate() > 0)
 				return true;
 		} catch (Exception e) {
@@ -110,12 +112,12 @@ public class NhanVienDAO {
 				String cmnd = (rs.getString(7) == null) ? "" : rs.getString(7);				
 				String email = (rs.getString(8) == null) ? "" : rs.getString(8);
 				String soDienThoai = (rs.getString(9) == null) ? "" : rs.getString(9);
-				int chucVu = (rs.getBoolean(1) == true) ? 1 : 0;
-				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu);
+				int chucVu = (rs.getBoolean(10) == true) ? 1 : 0;
+				byte[] anh = (rs.getBytes(11) == null) ? null : rs.getBytes(11);
+				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu, anh);
 				dsNhanVien.add(nhanVien);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return dsNhanVien;
@@ -145,8 +147,9 @@ public class NhanVienDAO {
 				String cmnd = (rs.getString(7) == null) ? "" : rs.getString(7);				
 				String email = (rs.getString(8) == null) ? "" : rs.getString(8);
 				String soDienThoai = (rs.getString(9) == null) ? "" : rs.getString(9);
-				int chucVu = (rs.getBoolean(1) == true) ? 1 : 0;
-				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu);
+				int chucVu = (rs.getBoolean(10) == true) ? 1 : 0;
+				byte[] anh = (rs.getBytes(11) == null) ? null : rs.getBytes(11);
+				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu, anh);
 				if(!danhSachNhanVienOnl.contains(nhanVien)) {
 					danhSachNhanVienOnl.add(nhanVien);
 					return nhanVien;
@@ -158,6 +161,21 @@ public class NhanVienDAO {
 		}
 
 		return null;
+	}
+	
+	
+	public boolean capNhatAnhDaiDien(String id, byte[] anh) {
+		try {
+			con = Database.getInStance().getConnection();
+			call = con.prepareCall("{call dbo.DoiAnhDaiDien (?, ?)}");
+			call.setString(1, id);
+			call.setBytes(2, anh);
+			if(call.executeUpdate() > 0)
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean dangXuat(NhanVien nhanVien) {
@@ -200,4 +218,5 @@ public class NhanVienDAO {
 		});
 		return listCMND;
 	}
+
 }

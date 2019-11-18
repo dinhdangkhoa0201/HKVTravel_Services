@@ -17,4 +17,5 @@ public interface NhanVienServices extends Remote{
 	public List<String> danhSachEmail() throws RemoteException;
 	public List<String> danhSachSDT() throws RemoteException;
 	public List<String> danhSachCMND() throws RemoteException;
+	public boolean capNhatAnhDaiDien(String id, byte[] anh) throws RemoteException;
 }

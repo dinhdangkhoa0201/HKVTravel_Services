@@ -15,6 +15,9 @@ public class NhanVien implements Serializable{
 	private String email;
 	private String soDienThoai;
 	private int chucVu;
+	private byte[] anh;
+	
+	
 	/**
 	 * @param maNV
 	 * @param hoTen
@@ -26,10 +29,10 @@ public class NhanVien implements Serializable{
 	 * @param email
 	 * @param soDienThoai
 	 * @param chucVu
-	 * @param tongThu
+	 * @param anh
 	 */
 	public NhanVien(String maNV, String hoTen, String gioiTinh, LocalDate ngaySinh, String cmnd, LocalDate ngayVaoLam,
-			String diaChi, String email, String soDienThoai, int chucVu) {
+			String diaChi, String email, String soDienThoai, int chucVu, byte[] anh) {
 		this.maNV = maNV;
 		this.hoTen = hoTen;
 		this.gioiTinh = gioiTinh;
@@ -40,8 +43,8 @@ public class NhanVien implements Serializable{
 		this.email = email;
 		this.soDienThoai = soDienThoai;
 		this.chucVu = chucVu;
+		this.anh = anh;
 	}
-	
 	/**
 	 * @param maNV
 	 */
@@ -174,6 +177,20 @@ public class NhanVien implements Serializable{
 	public void setChucVu(int chucVu) {
 		this.chucVu = chucVu;
 	}
+	/**
+	 * @return the anh
+	 */
+	public byte[] getAnh() {
+		return anh;
+	}
+
+	/**
+	 * @param anh the anh to set
+	 */
+	public void setAnh(byte[] anh) {
+		this.anh = anh;
+	}
+
 	/**
 	 * @return the tongThu
 	 */
