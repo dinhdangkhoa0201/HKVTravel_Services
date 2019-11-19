@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @SuppressWarnings("serial")
 public class NhanVien implements Serializable{
@@ -217,13 +218,14 @@ public class NhanVien implements Serializable{
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
 		return "NhanVien [maNV=" + maNV + ", hoTen=" + hoTen + ", gioiTinh=" + gioiTinh + ", ngaySinh=" + ngaySinh
 				+ ", cmnd=" + cmnd + ", ngayVaoLam=" + ngayVaoLam + ", diaChi=" + diaChi + ", email=" + email
-				+ ", soDienThoai=" + soDienThoai + ", chucVu=" + chucVu + "]";
+				+ ", soDienThoai=" + soDienThoai + ", chucVu=" + chucVu + ", anh=" + Arrays.toString(anh) + "]";
 	}
+
+	
 	
 	
 }

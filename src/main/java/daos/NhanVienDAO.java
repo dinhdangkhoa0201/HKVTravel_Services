@@ -163,6 +163,43 @@ public class NhanVienDAO {
 		return null;
 	}
 	
+	public NhanVien timNhanVienByMaNV(String id) {
+		try {
+			con = Database.getInStance().getConnection();
+			call = con.prepareCall("{call dbo.TimNhanVienByMaNV (?)}");
+			call.setString(1, id);
+			rs = call.executeQuery();
+			while(rs.next()) {
+				String maNV = rs.getString(1);
+				String hoTen = (rs.getString(2) == null) ? "" : rs.getString(2);
+				String gioiTinh = "";
+				switch (rs.getInt(3)) {
+				case 0: gioiTinh = "Nam";
+					break;
+				case 1: gioiTinh = "Nữ";
+					break;
+				default: gioiTinh = "";
+					break;
+				}
+				LocalDate ngaySinh = (rs.getDate(4) == null) ? null : rs.getDate(4).toLocalDate(); 
+				String diaChi = (rs.getString(5) == null) ? "" : rs.getString(5);
+				LocalDate ngayVaoLam = (rs.getDate(6) == null) ? null : rs.getDate(6).toLocalDate();
+				String cmnd = (rs.getString(7) == null) ? "" : rs.getString(7);				
+				String email = (rs.getString(8) == null) ? "" : rs.getString(8);
+				String soDienThoai = (rs.getString(9) == null) ? "" : rs.getString(9);
+				int chucVu = (rs.getBoolean(10) == true) ? 1 : 0;
+				byte[] anh = (rs.getBytes(11) == null) ? null : rs.getBytes(11);
+				NhanVien nhanVien = new NhanVien(maNV, hoTen, gioiTinh, ngaySinh, cmnd.replaceAll("[-]", ""), ngayVaoLam, diaChi, email, soDienThoai.replaceAll("[\\s]", ""), chucVu, anh);
+				return nhanVien;
+			}
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	public boolean capNhatAnhDaiDien(String id, byte[] anh) {
 		try {
