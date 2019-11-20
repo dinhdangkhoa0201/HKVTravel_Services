@@ -14,6 +14,7 @@ public class HuongDanVien implements Serializable{
 	private String soDienThoai;
 	private String diaChi;
 	private boolean trangThai;
+	private byte[] anh;
 	
 	/**
 	 * @param maHDV
@@ -25,9 +26,10 @@ public class HuongDanVien implements Serializable{
 	 * @param soDienThoai
 	 * @param diaChi
 	 * @param trangThai
+	 * @param anh
 	 */
 	public HuongDanVien(String maHDV, String hoTenHDV, String gioiTinh, LocalDate ngaySinh, String cmnd, String email,
-			String soDienThoai, String diaChi, boolean trangThai) {
+			String soDienThoai, String diaChi, boolean trangThai, byte[] anh) {
 		this.maHDV = maHDV;
 		this.hoTenHDV = hoTenHDV;
 		this.gioiTinh = gioiTinh;
@@ -37,6 +39,7 @@ public class HuongDanVien implements Serializable{
 		this.soDienThoai = soDienThoai;
 		this.diaChi = diaChi;
 		this.trangThai = trangThai;
+		this.anh = anh;
 	}
 	/**
 	 * @param maHDV
@@ -156,6 +159,18 @@ public class HuongDanVien implements Serializable{
 	 */
 	public void setTrangThai(boolean trangThai) {
 		this.trangThai = trangThai;
+	}
+	/**
+	 * @return the anh
+	 */
+	public byte[] getAnh() {
+		return anh;
+	}
+	/**
+	 * @param anh the anh to set
+	 */
+	public void setAnh(byte[] anh) {
+		this.anh = anh;
 	}
 	@Override
 	public String toString() {

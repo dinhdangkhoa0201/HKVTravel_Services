@@ -204,7 +204,7 @@ public class NhanVienDAO {
 	public boolean capNhatAnhDaiDien(String id, byte[] anh) {
 		try {
 			con = Database.getInStance().getConnection();
-			call = con.prepareCall("{call dbo.DoiAnhDaiDien (?, ?)}");
+			call = con.prepareCall("{call dbo.DoiAnhDaiDienNV (?, ?)}");
 			call.setString(1, id);
 			call.setBytes(2, anh);
 			if(call.executeUpdate() > 0)
