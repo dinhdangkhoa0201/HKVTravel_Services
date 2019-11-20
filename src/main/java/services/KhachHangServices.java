@@ -10,7 +10,7 @@ import entities.UserPassword;
 public interface KhachHangServices extends Remote{
 	public boolean themKhachHang(KhachHang khachHang, UserPassword userPassword) throws RemoteException;
 	public boolean xoaKhachHang(KhachHang khachHang) throws RemoteException;
-	public int suaKhachHang(KhachHang khachHang) throws RemoteException;
+	public boolean suaKhachHang(KhachHang khachHang) throws RemoteException;
 	public List<KhachHang> danhsachKhachHang() throws RemoteException;
 	public KhachHang dangNhap(String id) throws RemoteException;
 	public boolean dangXuat(KhachHang khachHang) throws RemoteException;

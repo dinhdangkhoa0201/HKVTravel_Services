@@ -33,7 +33,7 @@ public class KhachHangImp extends UnicastRemoteObject implements KhachHangServic
 	}
 
 	@Override
-	public int suaKhachHang(KhachHang khachHang) throws RemoteException {
+	public boolean suaKhachHang(KhachHang khachHang) throws RemoteException {
 		return khachHangDAO.suaKhachHang(khachHang);
 	}
 	

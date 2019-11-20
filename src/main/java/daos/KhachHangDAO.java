@@ -54,7 +54,7 @@ public class KhachHangDAO {
 		return false;
 	}
 
-	public int suaKhachHang(KhachHang khachHang) {
+	public boolean suaKhachHang(KhachHang khachHang) {
 		try {
 			con = Database.getInStance().getConnection();
 			call = con.prepareCall("{call dbo.CRUDKhachHang(2, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
@@ -72,11 +72,12 @@ public class KhachHangDAO {
 			call.setString(7, khachHang.getEmail());
 			call.setString(8, khachHang.getSoDienThoai()); 
 			call.setString(9, ""); 
-			return call.executeUpdate();
+			if(call.executeUpdate() > 0) 
+				return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return -1;
+		return false;
 	}
 
 	public List<KhachHang> danhsachKhachHang() {
@@ -96,6 +97,7 @@ public class KhachHangDAO {
 					break;
 				case 1:
 					gioiTinh = "Nữ";
+					break;
 				default:
 					gioiTinh = "";
 					break;
