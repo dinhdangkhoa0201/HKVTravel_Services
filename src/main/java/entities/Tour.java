@@ -16,9 +16,10 @@ public class Tour implements Serializable{
 	private String phuongTien;
 	private String giaVe;
 	private boolean hienThi;
-	private String anh;
+	private byte[] anh;
 	private int soLuongHanhKhach;
 	private HuongDanVien huongDanVien;
+	
 	/**
 	 * @param maTour
 	 * @param tenTour
@@ -35,7 +36,7 @@ public class Tour implements Serializable{
 	 * @param huongDanVien
 	 */
 	public Tour(String maTour, String tenTour, String noiDi, String noiDen, LocalDate ngayKhoiHanh,
-			LocalDate ngayKetThuc, LocalTime gioKhoiHanh, String phuongTien, String giaVe, boolean hienThi, String anh,
+			LocalDate ngayKetThuc, LocalTime gioKhoiHanh, String phuongTien, String giaVe, boolean hienThi, byte[] anh,
 			int soLuongHanhKhach, HuongDanVien huongDanVien) {
 		this.maTour = maTour;
 		this.tenTour = tenTour;
@@ -185,13 +186,13 @@ public class Tour implements Serializable{
 	/**
 	 * @return the anh
 	 */
-	public String getAnh() {
+	public byte[] getAnh() {
 		return anh;
 	}
 	/**
 	 * @param anh the anh to set
 	 */
-	public void setAnh(String anh) {
+	public void setAnh(byte[] anh) {
 		this.anh = anh;
 	}
 	/**

@@ -9,7 +9,8 @@ public class ChiTietTour implements Serializable{
 	private String moTa;
 	private String lichTrinh;
 	private String ghiChu;
-	private byte[] anh;
+	private String anh;
+	
 	/**
 	 * @param maTour
 	 * @param moTa
@@ -17,7 +18,7 @@ public class ChiTietTour implements Serializable{
 	 * @param ghiChu
 	 * @param anh
 	 */
-	public ChiTietTour(String maTour, String moTa, String lichTrinh, String ghiChu, byte[] anh) {
+	public ChiTietTour(String maTour, String moTa, String lichTrinh, String ghiChu, String anh) {
 		this.maTour = maTour;
 		this.moTa = moTa;
 		this.lichTrinh = lichTrinh;
@@ -80,19 +81,20 @@ public class ChiTietTour implements Serializable{
 	/**
 	 * @return the anh
 	 */
-	public byte[] getAnh() {
+	public String getAnh() {
 		return anh;
 	}
 	/**
 	 * @param anh the anh to set
 	 */
-	public void setAnh(byte[] anh) {
+	public void setAnh(String anh) {
 		this.anh = anh;
 	}
 	@Override
 	public String toString() {
 		return "ChiTietTour [maTour=" + maTour + ", moTa=" + moTa + ", lichTrinh=" + lichTrinh + ", ghiChu=" + ghiChu
-				+ ", anh=" + Arrays.toString(anh) + "]";
+				+ ", anh=" + anh + "]";
 	}
+	
 	
 }
