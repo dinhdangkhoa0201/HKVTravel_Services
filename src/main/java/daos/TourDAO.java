@@ -20,7 +20,7 @@ public class TourDAO {
 	public boolean themTour(Tour tour, ChiTietTour chiTietTour) {
 		try {
 			con = Database.getInStance().getConnection();
-			call = con.prepareCall("{call dbo.CRUD(1, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			call = con.prepareCall("{call dbo.CRUDTour(1, null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 			call.setString(1, tour.getTenTour());
 			call.setString(2, tour.getNoiDi());
 			call.setString(3, tour.getNoiDen());
@@ -40,6 +40,7 @@ public class TourDAO {
 			if (call.executeUpdate() > 0)
 				return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -48,7 +49,32 @@ public class TourDAO {
 		return false;
 	}
 	
-	public boolean suaTour(Tour tour) {
+	public boolean suaTour(Tour tour, ChiTietTour chiTietTour) {
+		try {
+			con = Database.getInStance().getConnection();
+			call = con.prepareCall("{call dbo.CRUDTour(2, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			call.setString(1, tour.getMaTour());
+			call.setString(2, tour.getTenTour());
+			call.setString(3, tour.getNoiDi());
+			call.setString(4, tour.getNoiDen());
+			call.setString(5, tour.getNgayKhoiHanh().toString());
+			call.setString(6, tour.getNgayKetThuc().toString());
+			call.setString(7, tour.getGioKhoiHanh().toString());
+			call.setString(8, tour.getPhuongTien());
+			call.setBoolean(9, tour.isHienThi());
+			call.setString(10, tour.getGiaVe());
+			call.setString(11, tour.getHuongDanVien().getMaHDV());
+			call.setBytes(12, tour.getAnh());
+			call.setInt(13, tour.getSoLuongHanhKhach());
+			call.setString(14, chiTietTour.getMoTa());
+			call.setString(15, chiTietTour.getLichTrinh());
+			call.setString(16, chiTietTour.getGhiChu());
+			call.setString(17, chiTietTour.getAnh());
+			if (call.executeUpdate() > 0)
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
@@ -70,15 +96,15 @@ public class TourDAO {
 				LocalTime gioKhoiHanh = rs.getTime(7).toLocalTime();
 				String phuongTien = rs.getString(8);
 				boolean hienThi = rs.getBoolean(9);
-				String giaVe = rs.getString(10);
+				String[] giaVe = rs.getString(10).split("[.]");
+				System.out.println(giaVe);
 				String maHDV = rs.getString(11);
 				byte[] anh = rs.getBytes(12);
 				int soLuongHanhKhach = rs.getInt(13);
-				Tour tour = new Tour(maTour, tenTour, noiDi, noiDen, ngayKhoiHanh, ngayKetThuc, gioKhoiHanh, phuongTien, giaVe, hienThi, anh, soLuongHanhKhach, new HuongDanVien(maHDV));
+				Tour tour = new Tour(maTour, tenTour, noiDi, noiDen, ngayKhoiHanh, ngayKetThuc, gioKhoiHanh, phuongTien, giaVe[0], hienThi, anh, soLuongHanhKhach, new HuongDanVien(maHDV));
 				dsTour.add(tour);
 			}
 			return dsTour;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

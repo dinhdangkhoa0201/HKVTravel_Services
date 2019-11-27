@@ -178,5 +178,30 @@ public class HuongDanVien implements Serializable{
 				+ ngaySinh + ", cmnd=" + cmnd + ", email=" + email + ", soDienThoai=" + soDienThoai + ", diaChi="
 				+ diaChi + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((maHDV == null) ? 0 : maHDV.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HuongDanVien other = (HuongDanVien) obj;
+		if (maHDV == null) {
+			if (other.maHDV != null)
+				return false;
+		} else if (!maHDV.equals(other.maHDV))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

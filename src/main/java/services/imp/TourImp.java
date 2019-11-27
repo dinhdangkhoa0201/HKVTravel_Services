@@ -26,8 +26,8 @@ public class TourImp extends UnicastRemoteObject implements TourServices{
 		return tourDAO.xoaTour(tour);
 	}
 
-	public boolean suaTour(Tour tour) throws RemoteException {
-		return tourDAO.suaTour(tour);
+	public boolean suaTour(Tour tour, ChiTietTour chiTietTour) throws RemoteException {
+		return tourDAO.suaTour(tour, chiTietTour);
 	}
 
 	public List<Tour> danhsachTour() throws RemoteException {
